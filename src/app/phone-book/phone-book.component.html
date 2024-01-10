@@ -1,0 +1,93 @@
+<div class="container">
+    <h1 class="container__title">My phone book!</h1>
+    <div class="createBook">
+        <input class="createBook__input" [(ngModel)]="field" placeholder="Search text goes here" />
+        <input type="button" class="createBook__button" value="add phone" (click)="AddPhone()">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th (click)="firstSort()" style="width: 25%;">First Name
+                    @if (hideFirstName) {
+                    <span [textContent]="sortFirst ? '&#x2191;' : '&#x2193;'" class="arrow"></span>
+                    }
+                </th>
+                <th (click)="lastSort()" style="width: 25%;">Last Name
+                    @if (hideLastName) {
+                    <span [textContent]="sortLast ? '&#x2191;' : '&#x2193;'" class="arrow"></span>
+                    }
+                </th>
+                <th (click)="numberSort()" style="width: 20%;">Number
+                    @if (hideNumber) {
+                    <span [textContent]="sortNumber ? '&#x2191;' : '&#x2193;'" class="arrow"></span>
+                    }
+                </th>
+                <th style="width: 10%;">edit</th>
+                <th style="width: 10%;">delite</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (contact of contacts | search: field | firstNameSort:sortFirst | lastNameSort:sortLast |
+            phoneNumerSort:sortNumber; track contact.id
+            ) {
+            <tr>
+                <td>{{contact.firstName}}</td>
+                <td>{{contact.lastName}}</td>
+                <td>{{contact.phoneNumber}}</td>
+                <td><button class="edit__btn" (click)="editTask(contact.id)"> Edit</button></td>
+                <td><button class="delite__btn" (click)="deleteTask(contact.id)">Delete</button></td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    @if (isAditing) {
+    <div class="modal__window">
+        <div class="modal">
+            <h2 class="modal__text">Add phone</h2>
+            <div class="modal__input">
+                <input type="text" [(ngModel)]="newContact.firstName" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor && !isFieldEmpty(newContact.firstName) ? 'rgb(196, 195, 195)' : 'red' "
+                    placeholder="First name goes here" required>
+                <input type="text" [(ngModel)]="newContact.lastName" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor && !isFieldEmpty(newContact.lastName) ? 'rgb(196, 195, 195)' : 'red' "
+                    placeholder="Second name goes here" required>
+                <input type="text" [(ngModel)]="newContact.phoneNumber" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor && !isFieldEmpty(newContact.phoneNumber) ? 'rgb(196, 195, 195)' : 'red' "
+                    placeholder="Number phone goes here" required>
+            </div>
+            <div class="button__container">
+                <button class="modal__btn" (click)="saveModal()">Save</button>
+
+            </div>
+        </div>
+    </div>
+    }
+
+
+    @if (isEditing) {
+    <div class="modal__window">
+        <div class="modal">
+            <h2 class="modal__text">Edit phone</h2>
+            <div class="modal__input">
+                <input type="text" [(ngModel)]="editedContact.firstName" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor ? 'rgb(196, 195, 195)' : 'red'" placeholder="Ім'я піде сюди" required>
+
+                <input type="text" [(ngModel)]="editedContact.lastName" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor ? 'rgb(196, 195, 195)' : 'red'" placeholder="Second name goes here"
+                    required>
+
+                <input type="text" [(ngModel)]="editedContact.phoneNumber" class="modal__input__newcontact"
+                    [style.borderColor]="!isColor ? 'rgb(196, 195, 195)' : 'red'" placeholder="Number phone goes here"
+                    required>
+            </div>
+            <div class="button__container">
+                <button class="modal__btn" (click)="changeModal()">Save</button>
+            </div>
+        </div>
+    </div>
+    }
+
+
+</div>
