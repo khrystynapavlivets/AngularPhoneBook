@@ -235,16 +235,23 @@ $background-modal: rgba(1, 1, 1, 0.493);
                 cursor: pointer;
                 margin: 1rem;
 
-                &:hover {
-                    font-weight: bold;
-                    outline: 2px solid rgba(77, 150, 88, 0.921);
-                    background-color: $green-hover;
+                &:not(:disabled) {
+                    &:hover {
+                        font-weight: bold;
+                        outline: 2px solid rgba(77, 150, 88, 0.921);
+                        background-color: $green-hover;
+                    }
+
+                    &:focus {
+                        font-weight: bold;
+                        outline: 4px solid rgba(77, 150, 88, 0.921);
+                        background-color: rgb(9, 151, 9);
+                    }
                 }
 
-                &:focus {
-                    font-weight: bold;
-                    outline: 4px solid rgba(77, 150, 88, 0.921);
-                    background-color: rgb(9, 151, 9);
+                &:disabled {
+                    cursor: not-allowed;
+                    background-color: rgb(92, 117, 105);
                 }
             }
 

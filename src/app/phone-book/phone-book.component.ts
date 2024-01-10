@@ -4,9 +4,6 @@ import { SearchPipe } from "./search.pipe";
 import { FirstNameSortPipe } from "./first-name-sort.pipe";
 import { LastNameSortPipe } from "./last-name-sort.pipe";
 import { PhoneNumerSortPipe } from "./phone-numer-sort.pipe";
-import { log } from 'console';
-
-
 
 export interface Contact {
   id: number,
@@ -127,26 +124,26 @@ export class PhoneBookComponent {
     const contactToEdit = this.contacts.find(contact => contact.id === id);
     if (contactToEdit) {
       this.editedContact = { ...contactToEdit };
-      console.log(this.editedContact.firstName);
     }
   }
 
   deleteTask(id: number): void {
-
     const index = this.contacts.findIndex(contact => contact.id === id);
-
     if (index !== -1) {
       this.contacts.splice(index, 1);
     }
   }
+
   isFieldEmpty(field: string): boolean {
     return !field.trim();
   }
+
   areFieldsValid(): boolean {
     return !this.isFieldEmpty(this.newContact.firstName) &&
       !this.isFieldEmpty(this.newContact.lastName) &&
       !this.isFieldEmpty(this.newContact.phoneNumber);
   }
+
   isSaveDisabled(): boolean {
     return this.isAditing && !this.areFieldsValid();
   }
@@ -158,8 +155,6 @@ export class PhoneBookComponent {
       this.regExp.lastName.test(this.newContact.lastName) &&
       this.regExp.phoneNumber.test(this.newContact.phoneNumber)
     ) {
-
-
       if (this.isAditing) {
         if (this.newContact.id === 0 && this.areFieldsValid()) {
           this.newContact.id = this.contacts.length + 1;
@@ -175,6 +170,7 @@ export class PhoneBookComponent {
     }
 
   }
+
   changeModal(): void {
     if (
       this.regExp.firstName.test(this.editedContact.firstName) &&
@@ -182,16 +178,13 @@ export class PhoneBookComponent {
       this.regExp.phoneNumber.test(this.editedContact.phoneNumber)
     ) {
       if (this.isEditing) {
-
         const index = this.contacts.findIndex(contact => contact.id === this.editedContact.id);
-
         if (index !== -1) {
           this.contacts[index].firstName = this.editedContact.firstName;
           this.contacts[index].lastName = this.editedContact.lastName;
           this.contacts[index].phoneNumber = this.editedContact.phoneNumber;
         }
       }
-
       this.isEditing = false;
       this.isAditing = false;
     }

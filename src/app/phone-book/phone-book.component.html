@@ -58,7 +58,13 @@
                     placeholder="Number phone goes here" required>
             </div>
             <div class="button__container">
-                <button class="modal__btn" (click)="saveModal()">Save</button>
+                <button class="modal__btn" (click)="saveModal()"
+                [disabled]="!this.regExp.firstName.test(this.newContact.firstName) || 
+                !this.regExp.lastName.test(this.newContact.lastName) || 
+                !this.regExp.phoneNumber.test(this.newContact.phoneNumber) || 
+                isFieldEmpty(newContact.phoneNumber) || 
+                isFieldEmpty(newContact.firstName) || 
+                isFieldEmpty(newContact.lastName)">Save</button>
 
             </div>
         </div>
