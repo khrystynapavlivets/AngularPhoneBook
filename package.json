@@ -44,15 +44,17 @@
     "typescript": "~5.2.2"
   },
   "budgets": [
-    {
-      "type": "initial",
-      "maximumWarning": "2mb",
-      "maximumError": "5mb"
-   },
-   {
-      "type": "styles",
-      "maximumWarning": "10kb",
-      "maximumError": "20kb"
-   }
+ {
+    "type": "initial",
+    "maximumWarning": "2mb",
+    "maximumError": "5mb",
+    "minimumError": "1kb",
+    "maximumAllowance": "5%"
+  },
+  {
+    "type": "anyComponentStyle",
+    "maximumWarning": "2kb",
+    "maximumError": "4kb"
+  }
  ]
 }
